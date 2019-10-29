@@ -2,13 +2,13 @@
 
 # Environnement de développement avec docker
 
-Un environnement de dev complet avec docker.
+Un environnement de développement complet avec docker.
 
 ## Installation
 
-Il vous faudra docker et docker-compose installer sur votre systeme.
+Il faudra que docker et docker-compose soit installé sur ton système.
 
-Récupérez le dépôt sur votre ordinateur :
+Récupére le dépôt sur ton ordinateur :
 
 ```bash
 git clone https://github.com/ArcaCode/docker-web-dev.git
@@ -16,48 +16,48 @@ git clone https://github.com/ArcaCode/docker-web-dev.git
 
 ## Utilisation
 
-Déplacez vous dans le dossier que vous venez de cloner :
+Déplace toi dans le dossier que tu viens de cloner :
 
 ```bash
 cd docker-web-dev
 ```
 
-Démarrer docker-compose :
+Démarre docker-compose :
 
 ```bash
 docker-compose up -d
 ```
 
-Créer un dossier dans le dossier app puis créer votre site a l’intérieur de celui-ci :
+Crée un dossier dans le dossier app puis crée ton site à l'intérieur de celui-ci :
 
 ```bash
 mkdir app/mon-site
 ```
 
-Pour accéder a votre site rendez-vous sur [localhost](http://localhost/).
+Pour accéder à ton site vas sur [localhost](http://localhost/).
 
 ## Option
-Si vous voulez utiliser un nom de domaine en local, créer un lien dans votre fichier hosts.
+Si tu veux utiliser un nom de domaine en local, crée un lien dans ton fichier hosts.
 
 ### Linux
 
 ```bash
 sudo vim /etc/hosts
 ```
-Et rajouter :
+Et rajoute :
 
 ```bash
 127.0.0.1  nom-de-domaine.local
 ```
-> En remplaçant "nom-de-domaine" par le nom du dossier que vous avez créer.
+> En remplaçant "nom-de-domaine" par le nom du dossier que tu as créé.
 
-Créer ensuite le fichier de configuration nginx:
+Crée ensuite le fichier de configuration nginx:
 
 ```bash
 touch .docker/nginx/nom-de-domaine.conf
 ```
 
-Editer le et coller le contenu suivant a l’intérieur puis sauvegarder :
+Edite le et colle le contenu suivant à l'intérieur puis sauvegarde :
 
 ```bash
 server {
@@ -81,12 +81,12 @@ server {
 }
 
 ```
-> En remplaçant "nom-de-domaine" par le nom de domaine choisie que vous avez créer.
+> En remplaçant "nom-de-domaine" par le nom de domaine choisi.
 
-Relancer les containers pour prendre en compte la nouvelle config :
+Relance les containers pour prendre en compte la nouvelle configuration :
 
 ```bash
 docker-compose restart
 ```
 
-Et voila votre nouveau site est disponible en local !
+Et voilà ton nouveau site est disponible en local !
