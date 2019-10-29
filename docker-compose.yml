@@ -1,0 +1,53 @@
+version: '2'
+services:
+    db:
+        image: mysql:8
+        container_name: db
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=local
+            - MYSQL_PASSWORD=root
+        ports:
+            - "3306:3306"
+        volumes:
+            - .docker/mysql:/var/lib/mysql
+    php-fpm:
+        build: .docker/php
+        restart: always
+        container_name: php-fpm
+        ports:
+            - "9000:9000"
+        volumes:
+            - .docker/nginx:/etc/nginx/conf.d
+            - .docker/php/php.ini:/usr/local/etc/php/php.ini
+            - ./app:/var/www
+        links:
+            - db:db
+    nginx:
+        image: nginx:latest
+        restart: always
+        container_name: nginx
+        ports:
+            - "80:80"
+        volumes:
+            - .docker/nginx:/etc/nginx/conf.d
+            - ./app:/var/www
+        links:
+            - php-fpm:php-fpm
+    mail:
+        image: djfarrelly/maildev
+        restart: always
+        container_name: mail
+        ports:
+            - "1080:80"
+            - "25:25"
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        container_name: phpmyadmin
+        ports:
+            - "8000:80"
+        links:
+            - db:db
